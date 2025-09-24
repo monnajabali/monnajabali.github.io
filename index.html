@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>Monna Jabali — Portfolio</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: black;
+      touch-action: none;
+      height: 100%;
+      width: 100%;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 10;
+      color: white;
+      font-family: sans-serif;
+    }
+
+    .overlay a {
+      color: white;
+      margin-right: 20px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    canvas {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Optional Navigation Overlay -->
+  <div class="overlay">
+    <a href="index.html">Projects</a>
+    <a href="info.html">Info & Contact</a>
+  </div>
+
+  <script>
+    let particles = [];
+    let sphereRadius = 400;
+    let zoom = 1;
+    let lastTouchDist = null;
+    let isMobile = false;
+
+    function setup() {
+      isMobile = windowWidth < 768;
+      if (isMobile) sphereRadius = 150;
+      createCanvas(windowWidth, windowHeight, WEBGL);
+      noStroke();
+      generateParticles();
+    }
+
+    function draw() {
+      background(0);
+      translate(0, 0, -600 * zoom);
+      rotateX((mouseY - height / 2) * 0.005);
+      rotateY((mouseX - width / 2) * 0.005);
+      for (let p of particles) {
+        p.show();
+      }
+    }
+
+    function generateParticles() {
+      particles = [];
+      for (let i = 0; i < 15000; i++) {
+        let theta = random(TWO_PI);
+        let phi = random(PI);
+        let noiseFactor = noise(cos(theta) * 3, sin(phi) * 3) * 30;
+        let craterDepth = noise(cos(theta) * 6, sin(phi) * 6) * 20;
+        let x = (sphereRadius + noiseFactor - craterDepth) * sin(phi) * cos(theta);
+        let y = (sphereRadius + noiseFactor - craterDepth) * sin(phi) * sin(theta);
+        let z = (sphereRadius + noiseFactor - craterDepth) * cos(phi);
+        let brightness = map(noise(theta * 2, phi * 2), 0, 1, 150, 255);
+        particles.push(new Particle(x, y, z, brightness));
+      }
+    }
+
+    class Particle {
+      constructor(x, y, z, brightness) {
+        this.pos = createVector(x, y, z);
+        this.size = random(0.5, 1.5);
+        this.brightness = brightness;
+      }
+
+      show() {
+        push();
+        translate(this.pos.x, this.pos.y, this.pos.z);
+        fill(255, this.brightness);
+        sphere(this.size);
+        pop();
+      }
+    }
+
+    function windowResized() {
+      resizeCanvas(windowWidth, windowHeight);
+    }
+
+    function mouseWheel(event) {
+      zoom += event.delta * -0.001;
+      zoom = constrain(zoom, 0.5, 2);
+    }
+
+    function touchMoved(event) {
+      if (touches.length === 2) {
+        let dx = touches[0].x - touches[1].x;
+        let dy = touches[0].y - touches[1].y;
+        let currentDist = sqrt(dx * dx + dy * dy);
+        if (lastTouchDist !== null) {
+          let zoomChange = (currentDist - lastTouchDist) * 0.005;
+          zoom += zoomChange;
+          zoom = constrain(zoom, 0.5, 2);
+        }
+        lastTouchDist = currentDist;
+      }
+    }
+
+    function touchEnded() {
+      lastTouchDist = null;
+    }
+  </script>
+</body>
+</html>
