@@ -1,0 +1,39 @@
+/* styles.css */
+
+body {
+  margin: 40px;
+  background-color: black;
+  color: #fff;
+  font-family: 'Helvetica Neue', sans-serif;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 1.6;
+  max-width: 700px;
+}
+
+nav {
+  margin-bottom: 40px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin-right: 20px;
+  font-weight: normal;
+  font-size: 14px;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+h1, h2 {
+  font-weight: normal;
+  font-size: 20px;
+  margin-top: 30px;
+}
+
+p {
+  margin-bottom: 10px;
+  color: #ddd;
+}
