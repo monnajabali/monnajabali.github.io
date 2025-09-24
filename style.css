@@ -1,24 +1,32 @@
 /* styles.css */
 
+/* GENERAL PAGE STYLE */
 body {
-  margin: 40px;
+  margin: 0;
   background-color: black;
-  color: #fff;
-  font-family: 'Helvetica Neue', sans-serif;
+  color: #ffffff;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: normal;
   font-size: 15px;
-  line-height: 1.6;
-  max-width: 700px;
+  line-height: 1.7;
+  padding: 80px 40px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
+/* NAVIGATION */
 nav {
-  margin-bottom: 40px;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 100;
 }
 
 nav a {
   color: white;
-  text-decoration: none;
   margin-right: 20px;
+  text-decoration: none;
   font-weight: normal;
   font-size: 14px;
 }
@@ -27,13 +35,30 @@ nav a:hover {
   text-decoration: underline;
 }
 
+/* HEADINGS & TEXT */
 h1, h2 {
   font-weight: normal;
   font-size: 20px;
-  margin-top: 30px;
+  margin-top: 40px;
+  color: #ffffff;
 }
 
-p {
-  margin-bottom: 10px;
-  color: #ddd;
+p, li {
+  margin-bottom: 15px;
+  color: #dddddd;
+}
+
+/* EXHIBITIONS LIST */
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* FOOTER */
+footer {
+  margin-top: 100px;
+  color: #666;
+  font-size: 13px;
+  text-align: center;
 }
