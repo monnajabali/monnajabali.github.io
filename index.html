@@ -4,8 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
   <title>Monna Jabali — Portfolio</title>
+
+  <!-- Load p5.js for the interactive ball -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+
+  <!-- Load your shared styles -->
   <link rel="stylesheet" href="styles.css" />
+
+  <!-- Custom styles for this page -->
   <style>
     html, body {
       margin: 0;
@@ -17,20 +23,25 @@
       width: 100%;
     }
 
+    /* Nav overlay on top of canvas */
     .overlay {
       position: absolute;
       top: 20px;
       left: 20px;
       z-index: 10;
-      color: white;
-      font-family: sans-serif;
     }
 
     .overlay a {
       color: white;
       margin-right: 20px;
       text-decoration: none;
-      font-weight: bold;
+      font-weight: normal;
+      font-size: 14px;
+      font-family: 'Helvetica Neue', sans-serif;
+    }
+
+    .overlay a:hover {
+      text-decoration: underline;
     }
 
     canvas {
@@ -43,12 +54,14 @@
 </head>
 <body>
 
-  <!-- Optional Navigation Overlay -->
+  <!-- Navigation -->
   <div class="overlay">
+    <a href="index.html"><strong>Monna Jabali</strong></a>
     <a href="index.html">Projects</a>
-    <a href="info.html">Info & Contact</a>
+    <a href="about.html">About</a>
   </div>
 
+  <!-- p5.js Ball Animation Script -->
   <script>
     let particles = [];
     let sphereRadius = 400;
